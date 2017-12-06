@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: <%= "#{ENV['DATABASE_NAME']}_development" %>
+
+test:
+  <<: *default
+  database: <%= "#{ENV['DATABASE_NAME']}_test" %>
+
+production:
+  <<: *default
+  database: <%= "#{ENV['DATABASE_NAME']}_production" %>
+  username: <%= ENV['HRMS_DATABASE_USER'] %>
+  password: <%= ENV['HRMS_DATABASE_PASSWORD'] %>
