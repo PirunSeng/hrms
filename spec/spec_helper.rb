@@ -18,6 +18,8 @@ Capybara.server = :thin
 RSpec.configure do |config|
   config.include Warden::Test::Helpers
   config.include FactoryBot::Syntax::Methods
+  config.include DeviseTokenAuthHelper, type: :request
+  config.include RequestSpecHelper, type: :request
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
@@ -36,7 +38,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    if Rails.env.test? || Rails.env.cucumber?
+    if Rails.env.test?
       FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
     end
     DatabaseCleaner.clean

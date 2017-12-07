@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 gem 'devise', '~> 4.3'
 gem 'devise_token_auth', '~> 0.1.42'
+gem 'omniauth', '~> 1.7', '>= 1.7.1'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -30,6 +31,7 @@ group :development, :test do
   gem 'thin', '~> 1.7', '>= 1.7.2'
   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
+  gem 'pry', '~> 0.11.3'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

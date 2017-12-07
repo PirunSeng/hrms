@@ -1,5 +1,5 @@
 describe 'Home' do
-  let!(:user){ create(:user) }
+  let(:user){ create(:user) }
 
   feature 'login' do
     scenario 'failed' do
