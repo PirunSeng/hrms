@@ -19,8 +19,17 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
+group :test do
+  gem 'capybara', '~> 2.16', '>= 2.16.1'
+  gem 'ffaker', '~> 2.7'
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.2'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
+end
+
 group :development, :test do
   gem 'thin', '~> 1.7', '>= 1.7.2'
+  gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
