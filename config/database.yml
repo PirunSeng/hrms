@@ -14,5 +14,5 @@ test:
 production:
   <<: *default
   database: <%= "#{ENV['DATABASE_NAME']}_production" %>
-  username: <%= ENV['HRMS_DATABASE_USER'] %>
-  password: <%= ENV['HRMS_DATABASE_PASSWORD'] %>
+  # username: <%= ENV['HRMS_DATABASE_USER'] %>
+  # password: <%= ENV['HRMS_DATABASE_PASSWORD'] %>
