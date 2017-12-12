@@ -1,0 +1,5 @@
+= simple_form_for @department do |f|
+  = f.input :name
+  = f.input :description, as: :text
+  = f.button :submit
+  = link_to 'Cancel', departments_path

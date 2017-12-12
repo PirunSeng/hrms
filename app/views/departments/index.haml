@@ -1,0 +1,16 @@
+
+%h3 Department list
+
+= link_to 'Add new department', new_department_path
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th{ colspan: '2' } Action
+  - @departments.each do |department|
+    %tr
+      %td= department.name
+      %td= department.description
+      %td= link_to 'Edit', edit_department_path(department)
+      %td= link_to 'Delete', department_path(department), method: :delete, data: { confirm: 'Are you sure you want to delete?' }

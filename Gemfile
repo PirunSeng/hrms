@@ -15,6 +15,8 @@ gem 'dotenv-rails', '~> 2.2', '>= 2.2.1'
 gem 'devise', '~> 4.3'
 gem 'devise_token_auth', '~> 0.1.42'
 gem 'omniauth', '~> 1.7', '>= 1.7.1'
+gem 'haml', '~> 5.0', '>= 5.0.4'
+gem 'simple_form', '~> 3.5'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
