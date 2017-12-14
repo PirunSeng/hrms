@@ -1,0 +1,15 @@
+%h3 Position list
+
+= link_to 'Add new position', new_position_path
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th{ colspan: '2' } Action
+  - @positions.each do |position|
+    %tr
+      %td= position.title
+      %td= position.description
+      %td= link_to 'Edit', edit_position_path(position)
+      %td= link_to 'Delete', position_path(position), method: :delete, data: { confirm: 'Are you sure you want to delete?' }
