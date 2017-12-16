@@ -16,12 +16,12 @@ RSpec.describe Applicant do
   describe 'validations' do
     let!(:applicant) { create(:applicant) }
 
-    it { is_ecpected.to validate_presence_of(:email) }
-    it { is_ecpected.to validate_presence_of(:interview_date) }
-    it { is_ecpected.to validate_presence_of(:name) }
-    it { is_ecpected.to validate_presence_of(:phone) }
-    it { is_ecpected.to validate_uniqueness_of(:email).case_insensitive }
-    it { is_ecpected.to validate_uniqueness_of(:phone).case_insensitive }
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:interview_date) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:phone) }
+    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+    it { is_expected.to validate_uniqueness_of(:phone).case_insensitive }
     context 'when done interviewing' do
       it 'should validate that :interview_result cannot be empty/falsy' do
         applicant.interview_status = 'done'

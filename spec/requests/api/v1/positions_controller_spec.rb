@@ -7,9 +7,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { get '/api/v1/positions' }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -18,9 +16,7 @@ describe Api::V1::DepartmentsController do
         get '/api/v1/positions', headers: @auth_headers
       end
 
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+      it_behaves_like 'successful request'
 
       it 'returns positions' do
         expect(json).not_to be_empty
@@ -33,9 +29,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { get "/api/v1/positions/#{id}" }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -45,9 +39,7 @@ describe Api::V1::DepartmentsController do
       end
 
       context 'when record is found' do
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
-        end
+        it_behaves_like 'successful request'
 
         it 'returns the position' do
           expect(json).not_to be_empty
@@ -74,9 +66,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { post '/api/v1/positions', params: valid_attributes }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -100,9 +90,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is not valid' do
         before { post '/api/v1/positions', params: { title: '' }, headers: @auth_headers }
 
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
+        it_behaves_like 'unprocessable entity'
 
         it 'returns a validation error message' do
           expect(response.body).to match(/Validation failed: Title can't be blank/)
@@ -115,9 +103,8 @@ describe Api::V1::DepartmentsController do
     valid_attributes = { title: 'QA' }
     context 'when user not logged in' do
       before { put "/api/v1/positions/#{id}", params: valid_attributes }
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -127,9 +114,8 @@ describe Api::V1::DepartmentsController do
 
       context 'when params is valid' do
         before { put "/api/v1/positions/#{id}", params: valid_attributes, headers: @auth_headers }
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
-        end
+
+        it_behaves_like 'successful request'
 
         it 'update the position' do
           expect(json).not_to be_empty
@@ -140,9 +126,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is not valid' do
         before { put "/api/v1/positions/#{id}", params: { title: '' }, headers: @auth_headers }
 
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
+        it_behaves_like 'unprocessable entity'
 
         it 'returns validation error message' do
           expect(response.body).to match(/Validation failed: Title can't be blank/)
@@ -154,9 +138,8 @@ describe Api::V1::DepartmentsController do
   describe 'DELETE /api/v1/positions/:id' do
     context 'when user not logged in' do
       before { delete "/api/v1/positions/#{id}" }
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do

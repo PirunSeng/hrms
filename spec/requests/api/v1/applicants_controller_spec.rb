@@ -7,9 +7,7 @@ describe Api::V1::ApplicantsController do
     context 'when user not logged in' do
       before { get '/api/v1/applicants' }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -18,9 +16,7 @@ describe Api::V1::ApplicantsController do
         get '/api/v1/applicants', headers: @auth_headers
       end
 
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+      it_behaves_like 'successful request'
 
       it 'returns applicants' do
         expect(json).not_to be_empty
@@ -33,9 +29,7 @@ describe Api::V1::ApplicantsController do
     context 'when user not logged in' do
       before { get "/api/v1/applicants/#{id}" }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -45,9 +39,7 @@ describe Api::V1::ApplicantsController do
       end
 
       context 'when record is found' do
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
-        end
+        it_behaves_like 'successful request'
 
         it 'returns the applicant' do
           expect(json).not_to be_empty
@@ -79,9 +71,7 @@ describe Api::V1::ApplicantsController do
     context 'when user not logged in' do
       before { post '/api/v1/applicants', params: valid_attributes }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -110,9 +100,7 @@ describe Api::V1::ApplicantsController do
         }
         before { post '/api/v1/applicants', params: invalid_attributes, headers: @auth_headers }
 
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
+        it_behaves_like 'unprocessable entity'
 
         it 'returns a validation error message' do
           expect(response.body).to match(/Validation failed: Email can't be blank/)
@@ -125,9 +113,8 @@ describe Api::V1::ApplicantsController do
     valid_attributes = { interview_status: 'shortlist' }
     context 'when user not logged in' do
       before { put "/api/v1/applicants/#{id}", params: valid_attributes }
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -137,9 +124,8 @@ describe Api::V1::ApplicantsController do
 
       context 'when params is valid' do
         before { put "/api/v1/applicants/#{id}", params: valid_attributes, headers: @auth_headers }
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
-        end
+
+        it_behaves_like 'successful request'
 
         it 'update the applicant' do
           expect(json).not_to be_empty
@@ -150,9 +136,7 @@ describe Api::V1::ApplicantsController do
       context 'when params is not valid' do
         before { put "/api/v1/applicants/#{id}", params: { interview_status: 'done' }, headers: @auth_headers }
 
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
+        it_behaves_like 'unprocessable entity'
 
         it 'returns validation error message' do
           expect(response.body).to match(/Validation failed: Interview result can't be blank/)
@@ -164,9 +148,8 @@ describe Api::V1::ApplicantsController do
   describe 'DELETE /api/v1/applicants/:id' do
     context 'when user not logged in' do
       before { delete "/api/v1/applicants/#{id}" }
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do

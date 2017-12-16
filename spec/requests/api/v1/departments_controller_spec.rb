@@ -9,9 +9,7 @@ describe Api::V1::DepartmentsController do
         get '/api/v1/departments'
       end
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -20,9 +18,7 @@ describe Api::V1::DepartmentsController do
         get '/api/v1/departments', headers: @auth_headers
       end
 
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
+      it_behaves_like 'successful request'
 
       it 'returns departments' do
         expect(json).not_to be_empty
@@ -35,9 +31,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { get "/api/v1/departments/#{id}" }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -47,9 +41,7 @@ describe Api::V1::DepartmentsController do
       end
 
       context 'when record is found' do
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
-        end
+        it_behaves_like 'successful request'
 
         it 'returns the department' do
           expect(json).not_to be_empty
@@ -75,9 +67,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { post '/api/v1/departments' }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -100,9 +90,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is not valid' do
         before { post '/api/v1/departments', params: { name: '' }, headers: @auth_headers }
 
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
+        it_behaves_like 'unprocessable entity'
 
         it 'returns a validation failure message' do
           expect(response.body).to match(/Validation failed: Name can't be blank/)
@@ -115,9 +103,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { put "/api/v1/departments/#{id}" }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -128,9 +114,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is valid' do
         before { put "/api/v1/departments/#{id}", params: { name: 'Development' }, headers: @auth_headers }
 
-        it 'returns status code 200' do
-          expect(response).to have_http_status(200)
-        end
+        it_behaves_like 'successful request'
 
         it 'update the department' do
           expect(json).not_to be_empty
@@ -141,9 +125,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is not valid' do
         before { put "/api/v1/departments/#{id}", params: { name: '' }, headers: @auth_headers }
 
-        it 'returns status code 422' do
-          expect(response).to have_http_status(422)
-        end
+        it_behaves_like 'unprocessable entity'
 
         it 'returns validation error message' do
           expect(response.body).to match(/Validation failed: Name can't be blank/)
@@ -156,9 +138,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { delete "/api/v1/departments/#{id}" }
 
-      it 'returns status code 401' do
-        expect(response).to have_http_status(401)
-      end
+      it_behaves_like 'unauthorized'
     end
 
     context 'when user logged in' do
@@ -167,12 +147,12 @@ describe Api::V1::DepartmentsController do
         delete "/api/v1/departments/#{id}", headers: @auth_headers
       end
 
-      it 'returns status code 200' do
+      it 'returns status code 204' do
         expect(response).to have_http_status(204)
       end
 
       it 'delete the department' do
-        expect(Department.ids).not_to include(id)
+        expect(Department.find_by(id: id)).to eq(nil)
       end
     end
   end
