@@ -9,7 +9,7 @@ describe Api::V1::DepartmentsController do
         get '/api/v1/departments'
       end
 
-      it 'should return status 401' do
+      it 'returns status code 401' do
         expect(response).to have_http_status(401)
       end
     end
@@ -35,7 +35,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { get "/api/v1/departments/#{id}" }
 
-      it 'should return status 401 unauthorized' do
+      it 'returns status code 401' do
         expect(response).to have_http_status(401)
       end
     end
@@ -47,11 +47,11 @@ describe Api::V1::DepartmentsController do
       end
 
       context 'when record is found' do
-        it 'should return status code 200' do
+        it 'returns status code 200' do
           expect(response).to have_http_status(200)
         end
 
-        it 'should return the department' do
+        it 'returns the department' do
           expect(json).not_to be_empty
           expect(json['id']).to eq(id)
         end
@@ -60,7 +60,7 @@ describe Api::V1::DepartmentsController do
       context 'when record is not found' do
         let(:id) { 0 }
 
-        it 'should return status code 404' do
+        it 'returns status code 404' do
           expect(response).to have_http_status(404)
         end
         it 'returns a not found message' do
@@ -75,7 +75,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { post '/api/v1/departments' }
 
-      it 'return status code 401' do
+      it 'returns status code 401' do
         expect(response).to have_http_status(401)
       end
     end
@@ -88,11 +88,11 @@ describe Api::V1::DepartmentsController do
       context 'when params is valid' do
         before { post '/api/v1/departments', params: valid_attributes, headers: @auth_headers }
 
-        it 'return the department' do
+        it 'returns the department' do
           expect(json['name']).to eq('Management')
         end
 
-        it 'return status code 201' do
+        it 'returns status code 201' do
           expect(response).to have_http_status(201)
         end
       end
@@ -100,7 +100,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is not valid' do
         before { post '/api/v1/departments', params: { name: '' }, headers: @auth_headers }
 
-        it 'return status code 422' do
+        it 'returns status code 422' do
           expect(response).to have_http_status(422)
         end
 
@@ -115,7 +115,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { put "/api/v1/departments/#{id}" }
 
-      it 'should return status 401' do
+      it 'returns status code 401' do
         expect(response).to have_http_status(401)
       end
     end
@@ -132,7 +132,7 @@ describe Api::V1::DepartmentsController do
           expect(response).to have_http_status(200)
         end
 
-        it 'should update the department' do
+        it 'update the department' do
           expect(json).not_to be_empty
           expect(json['name']).to eq('Development')
         end
@@ -141,7 +141,7 @@ describe Api::V1::DepartmentsController do
       context 'when params is not valid' do
         before { put "/api/v1/departments/#{id}", params: { name: '' }, headers: @auth_headers }
 
-        it 'should return status code 422' do
+        it 'returns status code 422' do
           expect(response).to have_http_status(422)
         end
 
@@ -156,7 +156,7 @@ describe Api::V1::DepartmentsController do
     context 'when user not logged in' do
       before { delete "/api/v1/departments/#{id}" }
 
-      it 'should return status 401' do
+      it 'returns status code 401' do
         expect(response).to have_http_status(401)
       end
     end
@@ -167,7 +167,7 @@ describe Api::V1::DepartmentsController do
         delete "/api/v1/departments/#{id}", headers: @auth_headers
       end
 
-      it 'return status 200' do
+      it 'returns status code 200' do
         expect(response).to have_http_status(204)
       end
 
