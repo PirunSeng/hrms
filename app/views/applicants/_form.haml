@@ -1,0 +1,9 @@
+= simple_form_for @applicant do |f|
+  = f.input :name
+  = f.input :email
+  = f.input :phone
+  = f.input :interview_date
+  = f.input :interview_status
+  = f.input :invitation_status
+  = f.button :submit
+  = link_to 'Cancel', applicants_path

@@ -1,0 +1,8 @@
+%h3 Applicant detail
+%p= "Name: #{@applicant.name}"
+%p= "Email: #{@applicant.email}"
+%p= "Phone: #{@applicant.phone}"
+%p= "Interview date: #{@applicant.interview_date}"
+%p= "Interview status: #{@applicant.interview_status}"
+%p= "Invitation status: #{@applicant.invitation_status}"
+%p= link_to 'Back to list', applicants_path

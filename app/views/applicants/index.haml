@@ -1,0 +1,23 @@
+%h3 Applicant list
+
+= link_to 'Add new applicant', new_applicant_path
+
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Phone
+    %th Interview date
+    %th Interview status
+    %th Invitation status
+    %th{ colspan: '2' } Action
+  - @applicants.each do |applicant|
+    %tr
+      %td= applicant.name
+      %td= applicant.email
+      %td= applicant.phone
+      %td= applicant.interview_date
+      %td= applicant.interview_status
+      %td= applicant.invitation_status
+      %td= link_to 'Edit', edit_applicant_path(applicant)
+      %td= link_to 'Delete', applicant_path(applicant), method: :delete, data: { confirm: 'Are you sure you want to delete?' }
