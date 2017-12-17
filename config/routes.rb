@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       resources :departments
       resources :positions
       resources :applicants
+      namespace :profile do
+        resources :users
+      end
     end
   end
 end

@@ -1,4 +1,4 @@
-describe Api::V1::DepartmentsController do
+describe Api::V1::PositionsController do
   let(:user) { create(:user) }
   let!(:positions){ create_list(:position, 2) }
   let(:id){ positions.first.id }
@@ -20,12 +20,12 @@ describe Api::V1::DepartmentsController do
 
       it 'returns positions' do
         expect(json).not_to be_empty
-        expect(json.size).to eq(2)
+        expect(json.size).to eq(3)
       end
     end
   end
 
-  describe 'GET /api/v1/departments/:id' do
+  describe 'GET /api/v1/positions/:id' do
     context 'when user not logged in' do
       before { get "/api/v1/positions/#{id}" }
 

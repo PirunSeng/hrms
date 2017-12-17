@@ -25,7 +25,7 @@ describe Api::V1::ApplicantsController do
     end
   end
 
-  describe 'GET /api/v1/departments/:id' do
+  describe 'GET /api/v1/applicants/:id' do
     context 'when user not logged in' do
       before { get "/api/v1/applicants/#{id}" }
 
