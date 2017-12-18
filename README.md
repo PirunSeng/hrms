@@ -1,3 +1,5 @@
+[ ![Codeship Status for PirunSeng/hrms](https://app.codeship.com/projects/8b9305c0-c638-0135-d1ad-5a018f317e7c/status?branch=master)](https://app.codeship.com/projects/261138)
+
 # HRMS
 
 HRMS - Human Resource Management System replaced all your HR paper work by a simple yet powerful web application to keep track your new applications, interview, shortlist and hire as a full-time staff. Plus, it includes leave management system in which your staff will be able to send leave request, your management will review it and either accept or reject the request, and more.
