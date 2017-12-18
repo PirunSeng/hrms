@@ -1,0 +1,15 @@
+= simple_form_for @employee do |f|
+  = f.input :name
+  = f.input :email
+  - unless @employee.persisted?
+    = f.input :password
+    = f.input :password_confirmation
+  = f.input :phone
+  = f.input :address
+  = f.input :salary
+  = f.input :start_date
+  = f.input :performance
+  = f.association :department, collection: @departments
+  = f.association :position, collection: @positions
+  = f.button :submit
+  = link_to 'Cancel', users_path

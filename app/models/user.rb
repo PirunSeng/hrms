@@ -1,3 +1,5 @@
+Rails.application.config.active_record.belongs_to_required_by_default = false
+
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
@@ -8,5 +10,5 @@ class User < ApplicationRecord
   belongs_to :position
 
   validates :name, :address, :salary, :start_date, presence: true
-  validates :phone, :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :phone, presence: true, uniqueness: { case_sensitive: false }
 end

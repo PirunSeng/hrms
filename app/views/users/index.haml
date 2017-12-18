@@ -1,0 +1,23 @@
+%h3 Employee list
+
+= link_to 'Add new employee', new_user_path
+
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Phone
+    %th Address
+    %th Salary
+    %th Performance
+    %th{ colspan: '2' } Action
+  - @employees.each do |employee|
+    %tr
+      %td= employee.name
+      %td= employee.email
+      %td= employee.phone
+      %td= employee.address
+      %td= employee.salary
+      %td= employee.performance
+      %td= link_to 'Edit', edit_user_path(employee)
+      %td= link_to 'Delete', user_path(employee), method: :delete, data: { confirm: 'Are you sure you want to delete?' }
